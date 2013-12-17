@@ -17,6 +17,7 @@
 .menu_holder
 {
 	width:900px;
+	box-shadow: 3px 3px 5px #888888;
 	background-color:#000000;
 	float: left;
 }
@@ -114,6 +115,22 @@ h1
     line-height: 20px;
     font-weight: bold;
     color: #EEEEEE;	
+}
+
+.error
+{
+	 margin: 5;
+	 padding: 20px;
+	 border:2px solid red;
+	 border-radius:25px;
+	 box-shadow: 5px 5px 5px #888888;
+     width: 450px;
+     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+     background-color:#F7FFB3;
+     font-size: 14px;
+     line-height: 18px;
+     font-weight: bold;
+     color: #960023;
 }
 
 a:link {text-decoration:none; color:#0080FF;}
