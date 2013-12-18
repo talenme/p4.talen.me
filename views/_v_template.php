@@ -7,6 +7,7 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<link rel="stylesheet" href="http://localhost/css/flash_cards.css">	
 	<link rel="stylesheet" href="http://localhost/css/datatable.css">	
+	<link rel="stylesheet" href="http://localhost/css/table_formatting.css">
 					
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>

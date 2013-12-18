@@ -97,8 +97,12 @@ class words_controller extends base_controller {
     	$this->template->client_files_head = Utils::load_client_files($client_files_head);
 
     	# Build the query
-    	$q = 'SELECT *
-    			FROM words';
+    	$q = 'SELECT words .* ,
+    				 users.first_name,
+    				 users.last_name
+    			FROM words
+    			INNER JOIN users
+    				ON words.user_id = users.user_id';
 
     	# Run the query
         $word_list = DB::instance(DB_NAME)->select_rows($q);
