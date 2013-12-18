@@ -4,6 +4,9 @@ From here you can browse the table of words.
 <br>
 <br>
 <br>
+
+<?php $i = 0; ?>
+
 <table id="word_table">
     <thead>
         <tr>
@@ -14,17 +17,13 @@ From here you can browse the table of words.
         </tr>
     </thead>
     <tbody>
-        <tr>
-            <td>Row 1 Data 1</td>
-            <td>Row 1 Data 2</td>
-            <td>etc</td>
-            <td>guy</td>
-        </tr>
-        <tr>
-            <td>Row 2 Data 1</td>
-            <td>Row 2 Data 2</td>
-            <td>etc</td>
-            <td>etc</td>
-        </tr>
+        <?php foreach($words as $word): ?>
+            <tr>
+                <td><?=Time::display($word['created'])?></td>
+                <td><?=$word['russian_word']?></td>
+                <td><?=$word['english_word']?></td>
+                <td>guy</td>
+            </tr>
+        <?php endforeach; ?>
     </tbody>
 </table>

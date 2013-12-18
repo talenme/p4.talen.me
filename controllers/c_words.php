@@ -96,6 +96,16 @@ class words_controller extends base_controller {
 
     	$this->template->client_files_head = Utils::load_client_files($client_files_head);
 
+    	# Build the query
+    	$q = 'SELECT *
+    			FROM words';
+
+    	# Run the query
+        $word_list = DB::instance(DB_NAME)->select_rows($q);
+
+        # Pass data to the View
+        $this->template->content->words = $word_list;
+
     	# Render template
         echo $this->template;
     }
