@@ -84,10 +84,20 @@ class words_controller extends base_controller {
 
     }
 
-    public function index() {
+    public function browse() {
     	# Set up the view
-    	$this->template->content = View::instance('v_words_index');
+    	$this->template->content = View::instance('v_words_browse');
     	$this->template->title = APP_NAME.": Words";
+
+    	$client_files_head = Array(
+        	"/js/jquery.dataTables.js",
+        	"/js/table_starter.js"
+    	);
+
+    	$this->template->client_files_head = Utils::load_client_files($client_files_head);
+
+    	# Render template
+        echo $this->template;
     }
 
 

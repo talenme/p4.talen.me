@@ -18,6 +18,6 @@ Options:<br>
 - Take Quiz<br>
 - <a href="/words/add">Add new word</a><br>
 - Add new word category<br>
-- Browse word library (and select/deselect words to use in your quizes)<br>
+- <a href="/words/browse">Browse word library</a> (and select/deselect words to use in your quizes)<br>
 + timed quizes
 
