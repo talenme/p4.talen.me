@@ -10,21 +10,26 @@ class words_controller extends base_controller {
         }
     }
 
-    public function add($error = NULL, $new_word = NULL) {
+    public function add($error = NULL) {
     	# Setup view
         $this->template->content = View::instance('v_words_add');
         $this->template->title   = APP_NAME.": Add Word";
 
-        # Pass data to the view
         $this->template->content->error = $error;
-        $this->template->content->new_word = $new_word;
+        # Load JS files
+    	$client_files_body = Array(
+        	"/js/jquery.form.js",
+        	"/js/words_add.js"
+    	);
+
+    	$this->template->client_files_body = Utils::load_client_files($client_files_body);
 
         # Render template
         echo $this->template;
 
     }
 
-    public function w_add() {
+    public function p_add() {
 
         # Associate this word entry with this user
         $_POST['user_id']  = $this->user->user_id;
@@ -32,6 +37,8 @@ class words_controller extends base_controller {
         # Unix timestamp of when this post was created / modified
         $_POST['created']  = Time::now();
         #$_POST['modified'] = Time::now();
+
+        $view = View::instance('v_words_p_add');
 
         # Check to see if either the Russian or the English word already exists in the db
         $q = "SELECT russian_word 
@@ -44,33 +51,36 @@ class words_controller extends base_controller {
         $russianCheck = DB::instance(DB_NAME)->select_field($q);
         $englishCheck = DB::instance(DB_NAME)->select_field($u);
         # If both words exist in db, show one type of warning message
-        if ($russianCheck && englishCheck)
+        if ($russianCheck && $englishCheck)
         { 
-            Router::redirect("/words/add/error");
+            $view->color = "red";
+            $view->message = "This word pair already exists in the database";
         }
         # If one of the words exists in the db, show a different message
         elseif ($russianCheck || $englishCheck)
         {
-        	Router::redirect("/words/add/error");
+        	$view->color = "red";
+        	if ($russianCheck)
+        	{
+        		$view->message = "The Russian entry already exists. Redundant entries are not
+        			permitted.";
+        	}
+        	else
+        	{
+        		$view->message = "The English entry already exists. Redundant entries are not
+        			permitted.";
+        	}
         }
         # Else we are good to enter this pair into the db
         else
         {
         	# Note we didn't have to sanitize any of the $_POST data because we're using the insert method which does it for us
         	DB::instance(DB_NAME)->insert('words', $_POST);
-        	#$this->template->content->error = NULL;
-        	Router::redirect("/words/add?code=2");
+        	#$this->template->content->error = 2;
+        	#Router::redirect("/words/add/error");
+        	$view->message = "Word pair added sucessfully";
         }
-
-
-        # If one or more does already exist, send them to the edit page for that entry
-
-        # Insert
-        # Note we didn't have to sanitize any of the $_POST data because we're using the insert method which does it for us
-        #DB::instance(DB_NAME)->insert('posts', $_POST);
-
-        # Quick and dirty feedback
-        #Router::redirect("/posts/add?submitted=1");
+        echo $view;
 
     }
 
