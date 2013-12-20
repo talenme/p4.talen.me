@@ -1,7 +1,7 @@
 
 <br>
-From here you can browse the table of words.         
-<br>
+Categories help you group similar words together.          
+
 <br>
 <br>
 
@@ -16,15 +16,42 @@ From here you can browse the table of words.
             <th>Russian Word</th>
             <th>English Word</th>
             <th>Created By</th>
+            <?php if($user->admin_flag) 
+            {
+                echo '<th>Approved</th>'; 
+                echo '<th>Actions</th>';
+            }
+            ?>
+
         </tr>
     </thead>
     <tbody>
         <?php foreach($words as $word): ?>
             <tr>
                 <td><?=Time::display($word['created'])?></td>
-                <td><?=$word['russian_word']?></td>
+                <td><?=$word['foreign_word']?></td>
                 <td><?=$word['english_word']?></td>
                 <td><?=$word['first_name']?> <?=$word['last_name']?></td>
+                <?php if($user->admin_flag) 
+                {
+                    if ($word['approved'] == 0)
+                    {
+                        echo '<td>NO</td>'; 
+                    }
+                    else
+                    {
+                        echo '<td>YES</td>';
+                    }
+                    echo '<td><input type="submit" value="Edit" class="edit">
+                              <input type="submit" value="Delete" class="edit">';
+
+                      if ($word['approved'] == 0)
+                      {
+                              echo' <input type="submit" value="Approve" class="edit">';
+                      }
+                    echo '</td>';
+                }
+                ?>
             </tr>
         <?php endforeach; ?>
     </tbody>

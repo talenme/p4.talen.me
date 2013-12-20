@@ -1,4 +1,7 @@
 <h1><?php if($user) echo 'Logged in as '.$user->first_name.' '.$user->last_name; ?></h1>
+
+<?php if($user->admin_flag) echo '<div class=\'error\'>You are working in <b>ADMIN</b> mode</div>'; ?><br>
+
 <br>
 	With this application you can add pairs of words to be used in flash card reviews.
 	In this version I am only focused on supporting a single language for study (Russian)
@@ -17,7 +20,7 @@
 Options:<br>
 - Take Quiz<br>
 - <a href="/words/add">Add new word</a><br>
-- Add new word category<br>
+- <a href="/words/category">Add new word category</a><br>
 - <a href="/words/browse">Browse word library</a> (and select/deselect words to use in your quizes)<br>
 + timed quizes
 

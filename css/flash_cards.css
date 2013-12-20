@@ -133,6 +133,30 @@ h1
      color: #960023;
 }
 
+.update
+{
+	 font-size: 14px;
+     line-height: 18px;
+     color: red;
+     font-weight: bold;
+}
+
+.inputDiv
+{
+	border:1px solid black;
+	width: 300px;
+	font-size: 14px;
+    line-height: 18px;
+    height:20px;
+}
+
+input.edit
+{
+    height: 16px;
+    width: 50px;
+    font-size: 10px;
+}
+
 a:link {text-decoration:none; color:#0080FF;}
 a:visited {text-decoration:none; color:#0080FF;}
 a:hover {text-decoration:none; color:#FF1717;}
