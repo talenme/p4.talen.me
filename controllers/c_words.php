@@ -47,7 +47,7 @@ class words_controller extends base_controller {
             $_POST['approved'] = "1";
         }
 
-        $view = View::instance('v_words_p_add');
+ #       $view = View::instance('v_words_p_add');
 
         # Check to see if either the foreign or the English word already exists in the db
         $q = "SELECT foreign_word 
@@ -85,11 +85,11 @@ class words_controller extends base_controller {
         {
         	# Note we didn't have to sanitize any of the $_POST data because we're using the insert method which does it for us
         	DB::instance(DB_NAME)->insert('words', $_POST);
-        	#$this->template->content->error = 2;
-        	#Router::redirect("/words/add/error");
+        	
         	$view->message = "Word pair added sucessfully";
         }
-        echo $view;
+#        echo $view;
+        Router::redirect("/words/browse");
 
     }
 
