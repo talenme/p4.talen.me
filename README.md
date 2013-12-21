@@ -18,6 +18,8 @@ I was careful to make sure foreign key deletions were cascaded when necessary.
 
 Testing constantly was difficult, and as I had to test many things before the code to control them was complete I had to do a lot of manual editing of the database.
 
+Is it okay that I used multiple forms for posting data back to the server? I didn't see a better way of doing this. 
+
 JavaScript -
-- Used in the add word page to make an ajax call for the add. 
+- Used in the add word page to make an ajax call for the add.
 - Used in the browse section to display a Jquery table

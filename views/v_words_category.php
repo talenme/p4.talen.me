@@ -21,12 +21,19 @@
     <tbody>
     	<?php foreach($cats as $cat): ?>
         <tr>
-        	<td><?=$cat['category_name']?></td>
+        	<td>
+        		<form method="POST" action="/words/cat_details">
+        			<input type="submit" value="<?=$cat['category_name']?>" class="unButton" style="background:none;border:0;color:#0080FF">
+        			<input type="hidden" name="category_id" value="<?=$cat['category_id']?>">
+        			<input type="hidden" name="category_name" value="<?=$cat['category_name']?>">
+        		</form>
+			</td>
         	<td> <?=$cat['word_count']?> </td>
         	<td> 
         		<form method="POST" action="/words/del_category">
                 	<input type="submit" value="Delete" class="edit"> 
                     <input type="hidden" name="category_name" value="<?=$cat['category_name']?>">
+                    <input type="hidden" name="user_id" value="<?=$cat['user_id']?>">
                 </form> 
             </td>
         </tr>

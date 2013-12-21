@@ -166,7 +166,7 @@ class words_controller extends base_controller {
         foreach ($items as $i)
         {
             $u = "SELECT *
-                    FROM users_word_map
+                    FROM cat_word_mapping
                     WHERE category_id = '".$i['category_id']."'";
 
             $query_count = DB::instance(DB_NAME)->select_rows($u);
@@ -220,41 +220,75 @@ class words_controller extends base_controller {
         # Associate this word entry with this user
         $_POST['user_id']  = $this->user->user_id;
 
-        # Unix timestamp of when this post was created / modified
-        #$_POST['created']  = Time::now();
-
-        #$view = View::instance('v_words_category');
-    
-        # verify this category already exists for this user
-        #$q = "SELECT category_name
-         #   FROM categories
-          #  WHERE category_name = '".$_POST['category_name']."' AND user_id = '".$this->user->user_id."'";
-
-        #$catCheck = DB::instance(DB_NAME)->select_field($q);
-
         $q = "DELETE FROM categories
-            WHERE category_name = '".$_POST['category_name']."'";
+            WHERE category_name = '".$_POST['category_name']."' 
+            AND user_id = '".$_POST['user_id']."'";
 
         # Run the command
         echo DB::instance(DB_NAME)->query($q);
-
-        #$view->message = "Category ".$_POST['category_name']." deleted!";
-        #$view->color = "black";
        
         Router::redirect("/words/category");
 
     }        
 
-    # This function generates the category list that is used in multiple places
-#   public function getCategoryList() {
-#       $q = "SELECT *
-##            FROM categories
- #           WHERE user_id = '".$this->user->user_id."'";
+    public function cat_details() {
+        # Setup view
+        $this->template->content = View::instance('v_cat_details');
+        $this->template->title   = APP_NAME.": Category Details";
+
+        $this->template->content->category_name = $_POST['category_name'];
+
+        # Load JS files
+        $client_files_body = Array(
+            "/js/jquery.dataTables.js",
+            "/js/table_starter.js"
+        );
+
+        $this->template->client_files_body = Utils::load_client_files($client_files_body);
+
+        $q = 'SELECT * 
+                  FROM words AS w, cat_word_mapping AS cwm
+                  WHERE cwm.category_id = "'.$_POST['category_id'].'"
+                    AND w.word_id = cwm.word_id';
 
         # Run the query
-#        $cat_results = DB::instance(DB_NAME)->select_rows($q);
+        $this->template->content->cat_words = DB::instance(DB_NAME)->select_rows($q);
 
- #       return $cat_results;
- #   }
+        # Render template
+        echo $this->template;
+    }
+
+    public function del_mapping() {
+        $this->template->content = View::instance('v_cat_details');
+        $this->template->title   = APP_NAME.": Category Details";
+        $this->template->content->category_name = $_POST['catg'];
+        $this->template->content->category_id = $_POST['category_id'];
+
+        # Load JS files
+        $client_files_body = Array(
+            "/js/jquery.dataTables.js",
+            "/js/table_starter.js"
+        );
+
+        $this->template->client_files_body = Utils::load_client_files($client_files_body);
+
+        $q = "DELETE FROM cat_word_mapping
+            WHERE word_id = '".$_POST['word_id']."'
+            AND category_id = '".$_POST['category_id']."'";
+
+        # Run the command
+        DB::instance(DB_NAME)->query($q);
+
+        $u = 'SELECT * 
+                  FROM words AS w, cat_word_mapping AS cwm
+                  WHERE cwm.category_id = "'.$_POST['category_id'].'"
+                    AND w.word_id = cwm.word_id';
+
+        # Run the query
+        $this->template->content->cat_words = DB::instance(DB_NAME)->select_rows($u);            
+       
+        echo $this->template;
+
+    } 
 
 } # end of the class

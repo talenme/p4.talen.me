@@ -157,6 +157,17 @@ input.edit
     font-size: 10px;
 }
 
+input.unButton
+{
+    height: 16px;
+    width: 200px;
+    font-size: 14px;
+    background:none;
+    border:0;
+    color:#0080FF;
+    text-align:left;
+}
+
 a:link {text-decoration:none; color:#0080FF;}
 a:visited {text-decoration:none; color:#0080FF;}
 a:hover {text-decoration:none; color:#FF1717;}
