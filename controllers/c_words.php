@@ -161,15 +161,19 @@ class words_controller extends base_controller {
                 $word_list[$counter]['cats'] = "";
             }
 
-        #    $word_list[$counter]['cats'][0] = $counter;
-        #    $word_list[$counter]['cats'][1] = "fart";
-        #    $word_list[$counter]['cats'] = $items;
             $counter++;
 
         }
+        # now get the category list for this user
+        $e = 'SELECT category_name
+                FROM categories
+                WHERE categories.user_id = "'.$this->user->user_id.'"';
+
+        $category_list = DB::instance(DB_NAME)->select_rows($e);
 
         # Pass data to the View
         $this->template->content->words = $word_list;
+        $this->template->content->categories = $category_list;
 
     	# Render template
         echo $this->template;
