@@ -237,6 +237,7 @@ class words_controller extends base_controller {
         $this->template->title   = APP_NAME.": Category Details";
 
         $this->template->content->category_name = $_POST['category_name'];
+        $this->template->content->message = "";
 
         # Load JS files
         $client_files_body = Array(
@@ -264,6 +265,7 @@ class words_controller extends base_controller {
         $this->template->content->category_name = $_POST['catg'];
         $this->template->content->category_id = $_POST['category_id'];
 
+        $this->template->content->message = $_POST['words']." removed from the ".$_POST['catg']." category.";
         # Load JS files
         $client_files_body = Array(
             "/js/jquery.dataTables.js",
