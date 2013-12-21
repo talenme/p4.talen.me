@@ -134,6 +134,40 @@ class words_controller extends base_controller {
     	# Run the query
         $word_list = DB::instance(DB_NAME)->select_rows($q);
 
+        $counter = 0;
+
+        foreach ($word_list as $wl)
+        {
+            $u = 'SELECT category_name
+                    FROM categories, cat_word_mapping
+                    WHERE cat_word_mapping.word_id="'.$wl['word_id'].'" 
+                    AND categories.category_id = cat_word_mapping.category_id
+                    AND categories.user_id = "'.$this->user->user_id.'"';
+
+            $items = DB::instance(DB_NAME)->select_rows($u);
+
+            if ($items)
+            {
+                $prev='';
+                foreach ($items as $i)
+                {
+                    $word_list[$counter]['cats'] = $prev.'&nbsp;&nbsp;&nbsp;'.$i['category_name'];
+                    $prev = $word_list[$counter]['cats'];
+                }
+                
+            }
+            else
+            {
+                $word_list[$counter]['cats'] = "";
+            }
+
+        #    $word_list[$counter]['cats'][0] = $counter;
+        #    $word_list[$counter]['cats'][1] = "fart";
+        #    $word_list[$counter]['cats'] = $items;
+            $counter++;
+
+        }
+
         # Pass data to the View
         $this->template->content->words = $word_list;
 

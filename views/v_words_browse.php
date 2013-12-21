@@ -12,7 +12,8 @@ Categories help you group similar words together.
 <table cellpadding="0" cellspacing="0" border="0" class="display" id="word_table">
     <thead>
         <tr>
-            <th>Created</th>
+            <th>Select</th>
+            <th>Categories</th>
             <th>Russian Word</th>
             <th>English Word</th>
             <th>Created By</th>
@@ -28,7 +29,8 @@ Categories help you group similar words together.
     <tbody>
         <?php foreach($words as $word): ?>
             <tr>
-                <td><?=Time::display($word['created'])?></td>
+                <td><input type="checkbox" name="vehicle" value="Bike"></td>
+                <td><?=$word['cats']?></td>
                 <td><?=$word['foreign_word']?></td>
                 <td><?=$word['english_word']?></td>
                 <td><?=$word['first_name']?> <?=$word['last_name']?></td>
@@ -42,7 +44,7 @@ Categories help you group similar words together.
                     {
                         echo '<td>YES</td>';
                     }
-                    echo '<td><input type="submit" value="Edit" class="edit">
+                    echo '<td>
                               <input type="submit" value="Delete" class="edit">';
 
                       if ($word['approved'] == 0)
