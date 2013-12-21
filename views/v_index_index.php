@@ -18,9 +18,9 @@
 	reviewing words.<br>
 <br>
 Options:<br>
-- Take Quiz<br>
-- <a href="/words/add">Add new word</a><br>
-- <a href="/words/category">Add new word category</a><br>
-- <a href="/words/browse">Browse word library</a> (and select/deselect words to use in your quizes)<br>
+- Review Words<br>
+- <a href="/words/add">Add new words</a><br>
+- <a href="/words/category">Add and remove Categories</a><br>
+- <a href="/words/browse">Browse word library</a> (and add words to Categories)<br>
 + timed quizes
 

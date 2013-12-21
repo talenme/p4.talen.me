@@ -101,14 +101,38 @@ class words_controller extends base_controller {
     	$client_files_head = Array(
         	"/js/jquery.dataTables.js",
         	"/js/table_starter.js",
-            "/js/jquery.form.js",
-            "/js/category_add.js"
+      #      "/js/jquery.form.js",
+      #      "/js/category_add.js"
     	);
 
     	$this->template->client_files_head = Utils::load_client_files($client_files_head);
 
-    	# Build the query
+        # if the user has submitted a request to add words...
+        if (isset($_POST['word_id_selected']))
+        {
+            $cat = $_POST['catdropdown'];
 
+            foreach ($_POST['word_id_selected'] as $sel)
+            {
+                $r = "SELECT *
+                        FROM cat_word_mapping
+                        WHERE word_id = '".$sel."'
+                        AND category_id = '".$cat."'";
+
+                if (!DB::instance(DB_NAME)->select_rows($r))
+                {
+
+                # build the array of values to insert
+                $values['category_id'] = $cat;
+                $values['word_id'] = $sel;
+                $values['created'] = Time::now();
+                # Note we didn't have to sanitize any of the $_POST data because we're using the insert method which does it for us
+                DB::instance(DB_NAME)->insert('cat_word_mapping', $values);
+                }
+            }
+        }
+
+    	# Build the query
     	# if this user is an admin
     	if ($this->user->admin_flag)
     	{
@@ -165,7 +189,7 @@ class words_controller extends base_controller {
 
         }
         # now get the category list for this user
-        $e = 'SELECT category_name
+        $e = 'SELECT category_name, category_id
                 FROM categories
                 WHERE categories.user_id = "'.$this->user->user_id.'"';
 
@@ -330,5 +354,9 @@ class words_controller extends base_controller {
         echo $this->template;
 
     } 
+
+    public function add_cat_words() {
+        echo ('here');
+    }
 
 } # end of the class

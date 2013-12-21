@@ -12,12 +12,13 @@ and also to the category 'nature' - it is up to you how you want to manage your 
 
 <?php if ($categories): ?>
 First select the category you want to add words to:
-<form method="post" action="/words/add_word_to_cat">
+<form method="POST" action="/words/browse">
     <select name="catdropdown">
         <?php foreach($categories as $c): ?>
-            <option value="<?=$c['category_name']?>"><?=$c['category_name']?></option>
+            <option value="<?=$c['category_id']?>"><?=$c['category_name']?></option>
         <?php endforeach; ?>
     </select>
+    <br>
 Next, select words from the listing below. When you are ready to add the selected words
 to your selected category hit the 'add' button.
 <?php endif ?>
@@ -48,7 +49,7 @@ to your selected category hit the 'add' button.
         <?php foreach($words as $word): ?>
             <tr>
                 <?php if ($categories): ?>
-                    <td><input type="checkbox" name="word_id_selected" value=<?=$word['word_id']?></td>
+                    <td><input type="checkbox" name="word_id_selected[]" value=<?=$word['word_id']?>></td>
                 <?php endif ?>
                 <td><?=$word['cats']?></td>
                 <td><?=$word['foreign_word']?></td>
