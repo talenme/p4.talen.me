@@ -22,7 +22,7 @@ class users_controller extends base_controller {
     public function p_signup() 
     {
         # Dump out the results of POST to see what the form submitted
-         print_r($_POST);
+        # print_r($_POST);
 
         # More data we want stored with the user
         $_POST['created']  = Time::now();
