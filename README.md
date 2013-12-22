@@ -27,7 +27,8 @@ Enhancements I'll make later -
 - Will add email verification step
 
 Open Bugs / Issues -
-If multiple items are selected across various pages of a table, only selected items that are visible will get applied when the 'apply' button is clicked. I would like to try to make it so that you can select items from various pages and apply them all at once.
+- If multiple items are selected across various pages of a table, only selected items that are visible will get applied when the 'apply' button is clicked. I would like to try to make it so that you can select items from various pages and apply them all at once.
+- I noticed during a final round of testing that some of the error messages I displayed before are no longer there, due to some of the UI reorganizing I did. An example is for the duplication of word entries. The good news is that I am still doing the validations and nothing is getting messed up behind the scenes.
 
 JavaScript -
 - Used in the add word page to make an ajax call for the add. ** I ended up removing the add page when I moved that function to the word 
