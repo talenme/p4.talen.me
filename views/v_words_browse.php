@@ -38,7 +38,8 @@
             <br>
             Next, select words from the listing below. When you are ready to add the selected words
             to your selected category hit the 'APPLY' button beneath the table. Word pairs may belong
-            to multiple categories.
+            to multiple categories. Only visible selections will be applied (you cannot make and apply
+            selections across multiple pages of the table)
         <?php endif ?>
     </div>
 
@@ -48,7 +49,7 @@
     <thead>
         <tr>
             <?php if ($categories): ?>
-                <th>Select</th>
+                <th>Add</th>
             <?php endif ?>
             <th>Categories</th>
             <th>Russian Word</th>
@@ -59,6 +60,10 @@
                 echo '<th>Approved</th>'; 
                 echo '<th>Delete</th>';
                 echo '<th>Approve</th>';
+            }
+            else
+            {
+                echo '<th>Delete</th>';
             }
             ?>
 
@@ -92,6 +97,15 @@
                               echo" <input type='checkbox' name='word_to_approve[]' value='".$word['word_id']."'>";
                       }
                     echo '</td>';
+                }
+                else
+                {
+                    echo "<td>";
+                    if ($word['deleteable'] == "1")
+                    {
+                        echo" <input type='checkbox' name='word_to_delete[]' value='".$word['word_id']."'>";
+                    }
+                    echo "</td>";
                 }
                 ?>
             </tr>

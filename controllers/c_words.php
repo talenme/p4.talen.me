@@ -107,7 +107,7 @@ class words_controller extends base_controller {
 
     	$this->template->client_files_head = Utils::load_client_files($client_files_head);
 
-        # if the user has submitted a request to add words...
+        # if the user has submitted a request to add words to category...
         if (isset($_POST['word_id_selected']))
         {
             $cat = $_POST['catdropdown'];
@@ -205,11 +205,12 @@ class words_controller extends base_controller {
     			  	OR words.user_id = "'.$this->user->user_id.'"';
     	}
 
-    	# Run the query
+    	# Run the query to get the list of words
         $word_list = DB::instance(DB_NAME)->select_rows($q);
 
         $counter = 0;
 
+        # get and add category names associated with each word
         foreach ($word_list as $wl)
         {
             $u = 'SELECT category_name
@@ -233,6 +234,16 @@ class words_controller extends base_controller {
             else
             {
                 $word_list[$counter]['cats'] = "";
+            }
+
+            # also identify if this word can be deleted by non-admin user
+            if (($wl['approved'] == 0) && ($wl['user_id'] == $this->user->user_id))
+            {
+                $word_list[$counter]['deleteable'] = "1";
+            }
+            else
+            {
+                $word_list[$counter]['deleteable'] = "0";
             }
 
             $counter++;
@@ -405,9 +416,5 @@ class words_controller extends base_controller {
         echo $this->template;
 
     } 
-
-    public function add_cat_words() {
-        echo ('here');
-    }
 
 } # end of the class

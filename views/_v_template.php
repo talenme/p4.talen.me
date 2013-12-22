@@ -27,7 +27,8 @@
     	<div class='menu_links'>
     		<!-- Top menu for users who are logged in -->
         		<?php if($user): ?>
-
+        			<a href='/words/browse'>Words</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+        			<a href='/words/category'>Categories</a>&nbsp;&nbsp;|&nbsp;&nbsp;
             		<a href='/users/logout'>Logout</a>&nbsp;&nbsp;|&nbsp;&nbsp;
 
         	<!-- Top menu options for users who are not logged in -->
