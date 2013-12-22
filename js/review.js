@@ -3,7 +3,9 @@ Greg Misicko December 2013
 Support for Flash Cards app
 -------------------------------------------------------------------------------------------------*/
 
-var data;
+var data = new Array();
+
+var index = 0;
 
 // when the drop down selection is made, this function is triggered
 $( "select" ).change(function () {
@@ -11,6 +13,8 @@ $( "select" ).change(function () {
         type: 'POST',
         url: '/review/get_words',
         beforeSend: function() {
+        	// reset the index
+        	index = 0;
             // Display a loading message while waiting for the ajax call to complete
             $('#results').html("Loading...");
         },
@@ -18,10 +22,13 @@ $( "select" ).change(function () {
                 // Load the results we get back from process.php into the results div
             //$('#results').html(response);
             data = jQuery.parseJSON(response);
+      //      data = JSON.parse(response);
+  
         	console.log(data);
-        	if (data[0]['foreign_word'])
+        	
+        	if (data[index]['foreign_word'])
         	{
-        		$('#results').html(data[0]['foreign_word']);
+        		$('#results').html(data[index]['foreign_word']);
         	}
         	else
         	{
@@ -36,7 +43,22 @@ $( "select" ).change(function () {
 
 }); 
 
+
 $('button').click(function() {
+	// if we are on an odd index, print the full definition
+	var def =" ";
+
+	alert(index);
+	if (index % 2)
+	{
+		def = data[index]['foreign_word']+"<br>"+data[index]['english_word'];
+	}
+	// on an even index, only display the foreign word
+	else
+	{
+		def = data[index]['foreign_word'];
+	}
+	document.getElementById('results').innerHTML = def;	
 	
-	document.getElementById('results').innerHTML = data[0]['english_word'];
-	});
+	index++;
+});

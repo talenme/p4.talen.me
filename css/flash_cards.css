@@ -124,6 +124,16 @@ h2
     color: #EEEEEE;	
 }
 
+.results
+{
+    margin: 0;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 40px;
+    line-height: 40px;
+    font-weight: bold;
+    color: #000000;	
+}
+
 .error
 {
 	 margin: 5;

@@ -38,19 +38,20 @@ class review_controller extends base_controller {
 
     }
 
+
     public function get_words() {
         
         $cat_id = $_POST['name'];
 
-        $q = "SELECT foreign_word, english_word, count(*) AS c
-                FROM words, cat_word_mapping AS cwm
+        $q = "SELECT w.foreign_word, w.english_word
+                FROM words AS w, cat_word_mapping AS cwm
                 WHERE cwm.category_id = '".$cat_id."'
-                    AND words.word_id = cwm.word_id";
+                    AND w.word_id = cwm.word_id";
 
         # Run the query to get the list of words
         $word_list = DB::instance(DB_NAME)->select_rows($q);
 
-        $counter = 0;
+#        $counter = 0;
         # count how many words there are in the category
 #        foreach ($word_list as $wl)
  #       {
@@ -70,6 +71,7 @@ class review_controller extends base_controller {
   #      {
 
   #     }
+  #      $cntt = sizeof($word_list);
 #
         echo json_encode($word_list);
     
