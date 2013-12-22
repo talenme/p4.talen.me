@@ -342,7 +342,7 @@ class words_controller extends base_controller {
             AND user_id = '".$_POST['user_id']."'";
 
         # Run the command
-        echo DB::instance(DB_NAME)->query($q);
+        DB::instance(DB_NAME)->query($q);
        
         Router::redirect("/words/category");
 
