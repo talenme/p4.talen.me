@@ -20,6 +20,7 @@
         </form>
     </div>
     <br>
+   
     <form method="POST" action="/words/browse">
     <div class='sectionContainer2'>
         <h2>Add Words to Selected Category</h2>
@@ -116,13 +117,10 @@
 </div>
 </div>
 
-<?php if ($categories): ?>
 <input type="submit" value="APPLY SELECTIONS">
 
 </form>
-<?php endif ?>
 
-</div>
 
 <br><br>
 
