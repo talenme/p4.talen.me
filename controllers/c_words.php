@@ -101,6 +101,7 @@ class words_controller extends base_controller {
     	$client_files_head = Array(
         	"/js/jquery.dataTables.js",
         	"/js/table_starter.js",
+            "/js/accordian_loader.js"
       #      "/js/jquery.form.js",
       #      "/js/category_add.js"
     	);

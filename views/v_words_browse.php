@@ -1,38 +1,30 @@
-<h1>Manage Words</h1>
+<h1><?=APP_NAME?> Manage Words</h1>
+    <div class='sectionContainer'>
+        <form method='post' action='/words/p_add'>
 
+        <h2> Add words to the library</h2>
+        
+        <div class='textInputContainer'>
+            <div class='inputHolder'>
+                Русское слово / Russian word<br>
+                <input type='text' name='foreign_word' size='35'>
+            </div>
+            <div class='inputHolder'>
+                English word / Английское слово<br>
+                <input type='text' name='english_word' size='35'>
+            </div>
 
-<form method='post' action='/words/p_add'>
-
-    <h1><?=APP_NAME?> Add words to the library</h1>
-    There could have been various ways of implementing this, and I chose an approach
-    which I think keeps things simple. You can enter a single word with a translation,
-    nothing more. The database was designed to support multiple languages, so in the
-    future I may change the UI to allow you to select other languages.<br>
+            <input type='submit' value='Add word'>
+        </div>
+        </form>
+    </div>
     <br>
-    Русское слово / Russian word<br>
-    <input type='text' name='foreign_word' size='35'>
-    <br><br>
+    <div class='sectionContainer2'>
+        <h2>Add Words to Selected Category</h2>
+    
 
-    English word / Английское слово<br>
-    <input type='text' name='english_word' size='35'>
-    <br><br>
-
-    <input type='submit' value='Add word'>
-
-</form>
-
-
-
-
-Categories help you group similar words together. This allows you to build 'stacks' of 
-flash cards that you can pull up for your studies. It is allowable to add the same word
-to multiple categories, so for example you could add 'cat' to the category 'animals'
-and also to the category 'nature' - it is up to you how you want to manage your library.
-<br><br>
-
-<?php if (!$categories) {echo '<div class="error">Oops! You have not created any categories yet - click 
-    <a href="/words/category">here</a> to get started</div>';}; ?>
-
+        <?php if (!$categories) {echo '<div class="error">Oops! You have not created any categories yet - click 
+        <a href="/words/category">here</a> to get started</div>';}; ?>
 
 <?php if ($categories): ?>
 First select the category you want to add words to:
@@ -44,9 +36,9 @@ First select the category you want to add words to:
     </select>
     <br>
 Next, select words from the listing below. When you are ready to add the selected words
-to your selected category hit the 'add' button.
+to your selected category hit the 'add' button. Word pairs may belong to multiple categories.
 <?php endif ?>
-
+    </div>
 
 <div id="dt_example">
     <div id="container">
@@ -63,7 +55,8 @@ to your selected category hit the 'add' button.
             <?php if($user->admin_flag) 
             {
                 echo '<th>Approved</th>'; 
-                echo '<th>Actions</th>';
+                echo '<th>Delete</th>';
+                echo '<th>Approve</th>';
             }
             ?>
 
@@ -89,12 +82,12 @@ to your selected category hit the 'add' button.
                     {
                         echo '<td>YES</td>';
                     }
-                    echo '<td>
-                              <input type="submit" value="Delete" class="edit">';
+                    echo "<td>
+                              <input type='checkbox' name='word_to_delete[]' value='".$word['word_id']."'></td><td>";
 
                       if ($word['approved'] == 0)
                       {
-                              echo' <input type="submit" value="Approve" class="edit">';
+                              echo" <input type='checkbox' name='word_to_approve[]' value='".$word['word_id']."'>";
                       }
                     echo '</td>';
                 }
@@ -114,3 +107,11 @@ to your selected category hit the 'add' button.
 <?php endif ?>
 
 </div>
+
+<br><br>
+
+Why can't you delete any words you want? You are only permitted to delete words that have been added by
+you, and are not in use by anyone else. 
+
+
+

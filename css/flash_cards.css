@@ -92,6 +92,13 @@ h1
 	margin-bottom:20px;
 }
 
+h2
+{
+	font-size: 14px;
+	line-height: 16px;
+	color: #668BFA;
+}
+
 .header
 {
     margin: 0;
@@ -139,6 +146,43 @@ h1
      line-height: 18px;
      color: red;
      font-weight: bold;
+}
+
+.sectionContainer
+{
+	border: 1px solid #E3E3E3;
+	width:800px;
+	height:90px;
+	box-shadow: 3px 3px 5px #888888;
+	background-color:#FFFFFF;
+	float: center;
+	margin-left:36px;
+}
+
+.sectionContainer2
+{
+	border: 1px solid #E3E3E3;
+	width:800px;
+	height:120px;
+	box-shadow: 3px 3px 5px #888888;
+	background-color:#FFFFFF;
+	margin-left:36px;
+}
+
+.textInputsContainer
+{
+	border:0px;
+	width: 750px;
+	height: 70px;
+	float: center;
+}
+
+.inputHolder
+{
+	border:0px;
+	width: 320px;
+	height: 55px;
+	float: left;
 }
 
 .inputDiv

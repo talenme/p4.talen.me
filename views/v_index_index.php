@@ -16,6 +16,12 @@
 	<br>
 	After you have created a category and added words to it, you may use that category for
 	reviewing words.<br>
+Categories help you group similar words together. This allows you to build 'stacks' of 
+flash cards that you can pull up for your studies. It is allowable to add the same word
+to multiple categories, so for example you could add 'cat' to the category 'animals'
+and also to the category 'nature' - it is up to you how you want to manage your library.
+<br><br>
+	
 <br>
 Options:<br>
 - Review Words<br>
