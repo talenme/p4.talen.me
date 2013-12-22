@@ -19,7 +19,14 @@ $( "select" ).change(function () {
             //$('#results').html(response);
             data = jQuery.parseJSON(response);
         	console.log(data);
-        	$('#results').html(data[0]['foreign_word']);
+        	if (data[0]['foreign_word'])
+        	{
+        		$('#results').html(data[0]['foreign_word']);
+        	}
+        	else
+        	{
+        		$('#results').html("Empty category!");
+        	}
         },
         // this is where to specify what data is posted back to server-side php
         data: {
@@ -30,6 +37,6 @@ $( "select" ).change(function () {
 }); 
 
 $('button').click(function() {
-	alert('hello');
+	
 	document.getElementById('results').innerHTML = data[0]['english_word'];
 	});

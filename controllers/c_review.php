@@ -42,7 +42,7 @@ class review_controller extends base_controller {
         
         $cat_id = $_POST['name'];
 
-        $q = "SELECT foreign_word, english_word
+        $q = "SELECT foreign_word, english_word, count(*) AS c
                 FROM words, cat_word_mapping AS cwm
                 WHERE cwm.category_id = '".$cat_id."'
                     AND words.word_id = cwm.word_id";
@@ -64,7 +64,13 @@ class review_controller extends base_controller {
 
   #          $counter++;
    #     }
+   #     $query_count = sizeof($word_list);
 
+   #     if ($query_count==0)
+  #      {
+
+  #     }
+#
         echo json_encode($word_list);
     
     }
