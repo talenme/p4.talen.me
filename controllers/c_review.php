@@ -32,6 +32,8 @@ class review_controller extends base_controller {
         # Pass data to the View
         $this->template->content->categories = $category_list;
 
+        $this->template->content->size = sizeof($category_list);
+
         # Render template
         echo $this->template;
 
