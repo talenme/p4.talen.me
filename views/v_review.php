@@ -8,6 +8,7 @@
 </select>
 
 <button>Next</button>
-
+<br>
+<br>
 <!-- Ajax results will go here -->
     <div id='results' class='results'></div>

@@ -5,7 +5,11 @@ Support for Flash Cards app
 
 var data = new Array();
 
+// used for moving through the word array
 var index = 0;
+// used for tracking where we are in the view progression, which first shows the foreign word
+// and then the definition
+var step = 0;
 
 // when the drop down selection is made, this function is triggered
 $( "select" ).change(function () {
@@ -15,6 +19,7 @@ $( "select" ).change(function () {
         beforeSend: function() {
         	// reset the index
         	index = 0;
+        	step = 0;
             // Display a loading message while waiting for the ajax call to complete
             $('#results').html("Loading...");
         },
@@ -34,6 +39,7 @@ $( "select" ).change(function () {
         	{
         		$('#results').html("Empty category!");
         	}
+        	step++;
         },
         // this is where to specify what data is posted back to server-side php
         data: {
@@ -48,10 +54,10 @@ $('button').click(function() {
 	// if we are on an odd index, print the full definition
 	var def =" ";
 
-	alert(index);
-	if (index % 2)
+	if (step % 2)
 	{
 		def = data[index]['foreign_word']+"<br>"+data[index]['english_word'];
+		index++;
 	}
 	// on an even index, only display the foreign word
 	else
@@ -60,5 +66,5 @@ $('button').click(function() {
 	}
 	document.getElementById('results').innerHTML = def;	
 	
-	index++;
+	step++;
 });
