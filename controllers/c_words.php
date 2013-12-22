@@ -211,21 +211,38 @@ class words_controller extends base_controller {
         # get and add category names associated with each word
         foreach ($word_list as $wl)
         {
-            $u = 'SELECT category_name
-                    FROM categories, cat_word_mapping
-                    WHERE cat_word_mapping.word_id="'.$wl['word_id'].'" 
-                    AND categories.category_id = cat_word_mapping.category_id
-                    AND categories.user_id = "'.$this->user->user_id.'"';
+            $u = 'SELECT c.category_name, c.category_id
+                    FROM categories AS c, cat_word_mapping AS cwm
+                    WHERE cwm.word_id="'.$wl['word_id'].'" 
+                    AND c.category_id = cwm.category_id
+                    AND c.user_id = "'.$this->user->user_id.'"';
 
             $items = DB::instance(DB_NAME)->select_rows($u);
 
             if ($items)
             {
                 $prev='';
+                $count = 0;
                 foreach ($items as $i)
                 {
-                    $word_list[$counter]['cats'] = $prev.'&nbsp;&nbsp;&nbsp;'.$i['category_name'];
+                    if ($count == 0)
+                    {
+                        $spacer = ' ';
+                    }
+                    else 
+                    {
+                        $spacer = ', ';
+                    }
+     #               $word_list[$counter]['cats'] = $prev.'&nbsp;&nbsp;&nbsp;'.$i['category_name'];
+                     $word_list[$counter]['cats'] = $prev.$spacer.$i['category_name'];
+     #               $word_list[$counter]['cats'] = $prev.
+     #                   '<form method="POST" action="/words/cat_details">
+     #                       <input type="submit" value="'.$i['category_name'].'" class="unButton" style="background:none;border:0;color:#0080FF">
+     #                       <input type="hidden" name="category_id" value="'.$i['category_id'].'">
+     #                       <input type="hidden" name="category_name" value="'.$i['category_name'].'">
+     #                   </form> ';
                     $prev = $word_list[$counter]['cats'];
+                    $count++;
                 }
                 
             }

@@ -51,8 +51,8 @@
         <tr>
             <?php if ($categories): ?>
                 <th>Add</th>
+                <th>Categories</th>
             <?php endif ?>
-            <th>Categories</th>
             <th>Russian Word</th>
             <th>English Word</th>
             <th>Created By</th>
@@ -75,8 +75,8 @@
             <tr>
                 <?php if ($categories): ?>
                     <td><input type="checkbox" name="word_id_selected[]" value=<?=$word['word_id']?>></td>
+                    <td><?=$word['cats']?></td>
                 <?php endif ?>
-                <td><?=$word['cats']?></td>
                 <td><?=$word['foreign_word']?></td>
                 <td><?=$word['english_word']?></td>
                 <td><?=$word['first_name']?> <?=$word['last_name']?></td>
