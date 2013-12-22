@@ -22,9 +22,12 @@ Enhancements I'll make later:
 - Make a multiple choice "game" for reviewing words
 - Set default categories for new users - settings would be inherited from some super user
 
+Open Bugs / Issues:
+If multiple items are selected across various pages of a table, only selected items that are visible will get applied when the 'apply' button is clicked. I would like to try to make it so that you can select items from various pages and apply them all at once.
+
 JavaScript:
 - Used in the add word page to make an ajax call for the add. ** I ended up removing the add page when I moved that function to the word 
-browser.
+browser. 
 - Used the datatable on various pages.
 - Had used a JQuery Accordion for some blocks of info, but removed it because it really didn't look smart.
 - Review Words: this is done using JavaScript and Ajax, calling the server to fetch word lists from the database.

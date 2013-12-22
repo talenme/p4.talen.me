@@ -4,9 +4,15 @@
 <h1>Create / Delete Categories</h1>
 <form method='POST' action='/words/p_category'>
 	Name a new word category to add:
-    <input type='text' name='category_name'>
+    <input type='text' name='category_name' autofocus>
     <input type='submit' value='Submit'>
 </form>
+
+<div id="info">
+    <br>
+    You can click on a category name to review the words belonging to it, and remove any you no longer wish to 
+    have in there.<br>
+</div>
 
 <div id="dt_example">
     <div id="container">

@@ -47,8 +47,6 @@ class words_controller extends base_controller {
             $_POST['approved'] = "1";
         }
 
- #       $view = View::instance('v_words_p_add');
-
         # Check to see if either the foreign or the English word already exists in the db
         $q = "SELECT foreign_word 
             FROM words 
@@ -325,18 +323,11 @@ class words_controller extends base_controller {
 
         $catCheck = DB::instance(DB_NAME)->select_field($q);
 
-        if ($catCheck)
-        {
-         #   $view->message = "You already have that category in your list!";
-         #   $view->color = "red";
-        }
-        else
+        // if the category doesn't already exist, go ahead and add it
+        if (!$catCheck)
         {
             # Note we didn't have to sanitize any of the $_POST data because we're using the insert method which does it for us
             DB::instance(DB_NAME)->insert('categories', $_POST);
-
-           # $view->message = "Category added!";
-           # $view->color = "black";
         }
         Router::redirect("/words/category");
 

@@ -1,6 +1,6 @@
 /*-------------------------------------------------------------------------------------------------
 Greg Misicko December 2013
-Support for Flash Cards app
+Logic for the word reviewer
 -------------------------------------------------------------------------------------------------*/
 
 var data = new Array();
@@ -33,7 +33,7 @@ $( "select" ).change(function () {
         	
         	limit = data.length;
 
-    //    	if (data[index]['foreign_word'])
+    		// careful not to error from empty result sets
     		if (limit)
         	{
         		$('#results').html(data[index]['foreign_word']);
@@ -72,7 +72,10 @@ $('button').click(function() {
 	{
 		def = data[index]['foreign_word'];
 	}
+
+	// display the word or words
 	document.getElementById('results').innerHTML = def;	
 	
+	// increment the step tracker
 	step++;
 });
