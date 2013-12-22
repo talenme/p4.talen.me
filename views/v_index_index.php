@@ -21,12 +21,14 @@ flash cards that you can pull up for your studies. It is allowable to add the sa
 to multiple categories, so for example you could add 'cat' to the category 'animals'
 and also to the category 'nature' - it is up to you how you want to manage your library.
 <br><br>
-	
-<br>
+
+<div class='sectionContainer'>
 Options:<br>
 - Review Words<br>
-- <a href="/words/add">Add new words</a><br>
-- <a href="/words/category">Add and remove Categories</a><br>
-- <a href="/words/browse">Browse word library</a> (and add words to Categories)<br>
-+ timed quizes
+- <a href="/words/category">Categories</a>: Add and remove Categories, view the contents
+of categories, remove words from categories<br>
+- <a href="/words/browse">Words</a>: Add words to the library, add words to the categories
+you've defined<br>
+</div>
+
 

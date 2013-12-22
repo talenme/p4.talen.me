@@ -27,6 +27,7 @@
     	<div class='menu_links'>
     		<!-- Top menu for users who are logged in -->
         		<?php if($user): ?>
+        			<a href='/review/cards'>Review</a>&nbsp;&nbsp;|&nbsp;&nbsp;
         			<a href='/words/browse'>Words</a>&nbsp;&nbsp;|&nbsp;&nbsp;
         			<a href='/words/category'>Categories</a>&nbsp;&nbsp;|&nbsp;&nbsp;
             		<a href='/users/logout'>Logout</a>&nbsp;&nbsp;|&nbsp;&nbsp;
@@ -46,9 +47,6 @@
     <div class='body_content'>
 		<?php if(isset($content)) echo $content; ?>
 		
-        
-
-
 		<?php if(isset($client_files_body)) echo $client_files_body; ?>
 	</div>
 	

@@ -278,6 +278,7 @@ class words_controller extends base_controller {
 
         $this->template->client_files_body = Utils::load_client_files($client_files_body);
 
+        # get the users categories
         $q = "SELECT *
             FROM categories
             WHERE user_id = '".$this->user->user_id."'";
@@ -287,6 +288,7 @@ class words_controller extends base_controller {
         
         $counter = 0;
 
+        # count how many words there are in the category
         foreach ($items as $i)
         {
             $u = "SELECT *
