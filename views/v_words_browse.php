@@ -21,7 +21,7 @@
     </div>
     <br>
    
-    <form method="POST" action="/words/browse">
+    <form method='post' action='/words/browse'>
     <div class='sectionContainer2'>
         <h2>Add Words to Selected Category</h2>
     
