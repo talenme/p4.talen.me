@@ -10,6 +10,8 @@ var index = 0;
 // used for tracking where we are in the view progression, which first shows the foreign word
 // and then the definition
 var step = 0;
+// used to make sure we don't try to access beyond the array index
+var limit = 0;
 
 // when the drop down selection is made, this function is triggered
 $( "select" ).change(function () {
@@ -24,14 +26,15 @@ $( "select" ).change(function () {
             $('#results').html("Loading...");
         },
         success: function(response) { 
-                // Load the results we get back from process.php into the results div
-            //$('#results').html(response);
+            // get the list of words into our data array
             data = jQuery.parseJSON(response);
-      //      data = JSON.parse(response);
-  
+  			// useful for debugging....
         	console.log(data);
         	
-        	if (data[index]['foreign_word'])
+        	limit = data.length;
+
+    //    	if (data[index]['foreign_word'])
+    		if (limit)
         	{
         		$('#results').html(data[index]['foreign_word']);
         	}
@@ -49,11 +52,16 @@ $( "select" ).change(function () {
 
 }); 
 
-
+// what to do when the next button is clicked
 $('button').click(function() {
+	// make sure we don't get a null pointer. If we've reached the end of the array,
+	// time to roll over
+	if (limit == index)
+	{
+		index = 0;
+		step = 0;
+	}
 	// if we are on an odd index, print the full definition
-	var def =" ";
-
 	if (step % 2)
 	{
 		def = data[index]['foreign_word']+"<br>"+data[index]['english_word'];

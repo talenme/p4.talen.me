@@ -24,7 +24,7 @@ and also to the category 'nature' - it is up to you how you want to manage your 
 
 <div class='sectionContainer'>
 Options:<br>
-- Review Words<br>
+- <a href="/review/cards">Review Words</a><br>
 - <a href="/words/category">Categories</a>: Add and remove Categories, view the contents
 of categories, remove words from categories<br>
 - <a href="/words/browse">Words</a>: Add words to the library, add words to the categories
