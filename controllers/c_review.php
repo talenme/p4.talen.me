@@ -17,7 +17,6 @@ class review_controller extends base_controller {
 
         # Load JS files
     	$client_files_body = Array(
-        	#"/js/jquery.form.js",
         	"/js/review.js"
     	);
 
@@ -51,28 +50,7 @@ class review_controller extends base_controller {
         # Run the query to get the list of words
         $word_list = DB::instance(DB_NAME)->select_rows($q);
 
-#        $counter = 0;
-        # count how many words there are in the category
-#        foreach ($word_list as $wl)
- #       {
- #           $u = "SELECT *
- #                   FROM cat_word_mapping
- #                   WHERE category_id = '".$wl['category_id']."'";
-
-#            $query_count = DB::instance(DB_NAME)->select_rows($u);
-
- #           $word_list[$counter]['word_count'] = sizeof($query_count);
-
-  #          $counter++;
-   #     }
-   #     $query_count = sizeof($word_list);
-
-   #     if ($query_count==0)
-  #      {
-
-  #     }
-  #      $cntt = sizeof($word_list);
-#
+        # send the results back in JSON format
         echo json_encode($word_list);
     
     }
