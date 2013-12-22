@@ -1,4 +1,5 @@
 <h1><?=APP_NAME?> Manage Words</h1>
+    <div class='message'><?=$message?></div>
     <div class='sectionContainer'>
         <form method='post' action='/words/p_add'>
 
@@ -19,25 +20,26 @@
         </form>
     </div>
     <br>
+    <form method="POST" action="/words/browse">
     <div class='sectionContainer2'>
         <h2>Add Words to Selected Category</h2>
     
-
         <?php if (!$categories) {echo '<div class="error">Oops! You have not created any categories yet - click 
         <a href="/words/category">here</a> to get started</div>';}; ?>
 
-<?php if ($categories): ?>
-First select the category you want to add words to:
-<form method="POST" action="/words/browse">
-    <select name="catdropdown">
-        <?php foreach($categories as $c): ?>
-            <option value="<?=$c['category_id']?>"><?=$c['category_name']?></option>
-        <?php endforeach; ?>
-    </select>
-    <br>
-Next, select words from the listing below. When you are ready to add the selected words
-to your selected category hit the 'add' button. Word pairs may belong to multiple categories.
-<?php endif ?>
+        <?php if ($categories): ?>
+            First select the category you want to add words to:
+            
+            <select name="catdropdown">
+            <?php foreach($categories as $c): ?>
+                <option value="<?=$c['category_id']?>"><?=$c['category_name']?></option>
+            <?php endforeach; ?>
+            </select>
+            <br>
+            Next, select words from the listing below. When you are ready to add the selected words
+            to your selected category hit the 'APPLY' button beneath the table. Word pairs may belong
+            to multiple categories.
+        <?php endif ?>
     </div>
 
 <div id="dt_example">
@@ -101,7 +103,7 @@ to your selected category hit the 'add' button. Word pairs may belong to multipl
 </div>
 
 <?php if ($categories): ?>
-<input type="submit" value="Add Words">
+<input type="submit" value="APPLY SELECTIONS">
 
 </form>
 <?php endif ?>

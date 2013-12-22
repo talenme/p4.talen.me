@@ -148,6 +148,14 @@ h2
      font-weight: bold;
 }
 
+.message
+{
+	 font-size: 14px;
+     line-height: 18px;
+     color: green;
+     font-weight: bold;
+}
+
 .sectionContainer
 {
 	border: 1px solid #E3E3E3;

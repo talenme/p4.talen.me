@@ -98,12 +98,11 @@ class words_controller extends base_controller {
     	$this->template->content = View::instance('v_words_browse');
     	$this->template->title = APP_NAME.": Words";
 
+        $message = "";
+
     	$client_files_head = Array(
         	"/js/jquery.dataTables.js",
         	"/js/table_starter.js",
-            "/js/accordian_loader.js"
-      #      "/js/jquery.form.js",
-      #      "/js/category_add.js"
     	);
 
     	$this->template->client_files_head = Utils::load_client_files($client_files_head);
@@ -122,14 +121,64 @@ class words_controller extends base_controller {
 
                 if (!DB::instance(DB_NAME)->select_rows($r))
                 {
+                    $y = "SELECT english_word
+                            FROM words
+                            WHERE word_id = '".$sel."'";
 
-                # build the array of values to insert
-                $values['category_id'] = $cat;
-                $values['word_id'] = $sel;
-                $values['created'] = Time::now();
-                # Note we didn't have to sanitize any of the $_POST data because we're using the insert method which does it for us
-                DB::instance(DB_NAME)->insert('cat_word_mapping', $values);
+                    $a = "SELECT category_name
+                            FROM categories
+                            WHERE category_id ='".$cat."'";
+
+                    $word_name = DB::instance(DB_NAME)->select_field($y);
+                    $cate_name = DB::instance(DB_NAME)->select_field($a);
+
+                    # build the array of values to insert
+                    $values['category_id'] = $cat;
+                    $values['word_id'] = $sel;
+                    $values['created'] = Time::now();
+                    # Note we didn't have to sanitize any of the $_POST data because we're using the insert method which does it for us
+                    DB::instance(DB_NAME)->insert('cat_word_mapping', $values);
+                    $message .= "added ".$word_name." to ".$cate_name."; ";
                 }
+            }
+        }
+
+        # if the user has submitted a request to delete words...
+        if (isset($_POST['word_to_delete']))
+        {
+            foreach ($_POST['word_to_delete'] as $sel)
+            {
+                $y = "SELECT english_word
+                            FROM words
+                            WHERE word_id = '".$sel."'";
+
+                $word_name = DB::instance(DB_NAME)->select_field($y);
+                            
+                # Delete this connection
+                $where_condition = "WHERE word_id = '".$sel."'";  
+                DB::instance(DB_NAME)->delete('words', $where_condition); 
+                $message .= "deleted ".$word_name."; ";
+            }
+        }
+
+        # if the user has submitted a request to approve words...
+        if (isset($_POST['word_to_approve']))
+        {
+            foreach ($_POST['word_to_approve'] as $sel)
+            {
+                $y = "UPDATE words 
+                        SET approved = '1' 
+                        WHERE words.word_id = '".$sel."'";
+
+                $a = "SELECT english_word
+                            FROM words
+                            WHERE word_id = '".$sel."'";
+
+                $word_name = DB::instance(DB_NAME)->select_field($a);
+                            
+                # approve this word
+                DB::instance(DB_NAME)->query($y);
+                $message .= "approved ".$word_name."; ";
             }
         }
 
@@ -199,6 +248,7 @@ class words_controller extends base_controller {
         # Pass data to the View
         $this->template->content->words = $word_list;
         $this->template->content->categories = $category_list;
+        $this->template->content->message = $message;
 
     	# Render template
         echo $this->template;
